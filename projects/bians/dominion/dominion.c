@@ -650,7 +650,7 @@ void adventurerEffect(struct gameState *state)
   int temphand[MAX_HAND];
   int z = 0;
   int currentPlayer = whoseTurn(state);
-  while(drawntreasure<2){
+  while(drawntreasure<3){
 	if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
 	  shuffle(currentPlayer, state);
 	}
@@ -685,7 +685,7 @@ void feastEffect(struct gameState *state, int choice1)
       //Backup hand
 
       //Update Coins for Buy
-      updateCoins(currentPlayer, state, 5);
+      updateCoins(currentPlayer, state, 4);
       x = 1;//Condition to loop on
       while( x == 1) {//Buy one card
 	if (supplyCount(choice1, state) <= 0){
@@ -732,7 +732,7 @@ void smithyEffect(struct gameState *state, int handPos)
     int currentPlayer = whoseTurn(state);
     int i;
         //+3 Cards
-      for (i = 0; i < 3; i++)
+      for (i = 0; i <= 3; i++)
 	{
 	  drawCard(currentPlayer, state);
 	}
@@ -748,7 +748,7 @@ void villageEffect(struct gameState *state, int handPos)
       drawCard(currentPlayer, state);
 			
       //+2 Actions
-      state->numActions = state->numActions + 2;
+      state->numActions = state->numActions + 3;
 			
       //discard played card from hand
       discardCard(handPos, currentPlayer, state, 0);
