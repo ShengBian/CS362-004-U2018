@@ -1,2 +1,6 @@
-run make all #To compile the dominion code
-run ./playdom 30 # to run playdom code
+This is my Assignment 3 submission! 
+
+# How to run program, please enter:
+make unittestresults
+
+# Then, check the file unittestresults.out for results 
