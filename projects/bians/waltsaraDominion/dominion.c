@@ -650,20 +650,20 @@ int SmithyCard(int currentPlayer, struct gameState *state, int handPos) {
 
     //+3 Cards
     int i;
-    for (i = 0; i < 5; i++)
+    for (i = 0; i < 3; i++)
     {
         drawCard(currentPlayer, state);
     }
 
     //discard card from hand
-    //discardCard(handPos, currentPlayer, state, 0);
+    discardCard(handPos, currentPlayer, state, 0);
     return 0;
 //bug introduced: draw 5 cards instead of 3; do not discard a card
 }
 
 int AdventurerCard(int currentPlayer, struct gameState *state, int drawntreasure, int temphand[], int cardDrawn, int z) {
 
-    while(drawntreasure<5){
+    while(drawntreasure<2){
         if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
             shuffle(currentPlayer, state);
         }
@@ -691,11 +691,9 @@ int VillageCard(int currentPlayer, struct gameState *state, int handPos){
 
     //+1 Card
     drawCard(currentPlayer, state);
-    drawCard(currentPlayer, state);
-    drawCard(currentPlayer, state);
 
     //+2 Actions
-    state->numActions = state->numActions + 10;
+    state->numActions = state->numActions + 2;
 
     //discard played card from hand
     discardCard(handPos, currentPlayer, state, 0);
