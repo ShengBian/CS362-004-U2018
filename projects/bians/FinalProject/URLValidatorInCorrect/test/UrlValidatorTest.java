@@ -103,7 +103,6 @@ public class UrlValidatorTest extends TestCase {
 				failCount++;	
 			}
 			totalCount++;
-			System.out.printf(fullURL + "\n");
 		}
 		
 		
