@@ -16,17 +16,126 @@ public class UrlValidatorTest extends TestCase {
 
 	}
 
+	// This function is to test Scheme Partition
 	public void testYourFirstPartition() {
-		// You can use this function to implement your First Partition testing
+		UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+		System.out.println(">>>>>>>>>>>>>>>> Scheme Partition Testing <<<<<<<<<<<<<<<<<<");
+		int failCount = 0;
+		int totalCount = 0;
+		for (int a = 0; a < scheme.length; a++) {
+			String fullURL = scheme[a] + "www.google.com";
+			boolean expectedResult = schemeIsValid[a];
+			boolean actualResult = urlVal.isValid(fullURL);
+			if(expectedResult != actualResult) {
+				System.out.printf("Failed! URL: %s, Expected: %b, Actual: %b\n", fullURL, expectedResult, actualResult);
+				failCount++;	
+			}
+			totalCount++;
+		}
 
+		System.out.printf("Scheme Partition Testing Total Running Cases: %d\n", totalCount);
+		System.out.printf("Scheme Partition Testing Total Failed Cases: %d\n", failCount);
+		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> Scheme Partition Testing End <<<<<<<<<<<<<<<<<<<<<<<<<<<");
 	}
 
+	// This function is to test Authority Partition
 	public void testYourSecondPartition() {
-		// You can use this function to implement your Second Partition testing
+		UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+		System.out.println(">>>>>>>>>>>>>>>> Authority Partition Testing <<<<<<<<<<<<<<<<<<");
+		int failCount = 0;
+		int totalCount = 0;
+		for (int a = 0; a < authority.length; a++) {
+			String fullURL = "http://" + authority[a];
+			boolean expectedResult = authorityIsValid[a];
+			boolean actualResult = urlVal.isValid(fullURL);
+			if(expectedResult != actualResult) {
+				System.out.printf("Failed! URL: %s, Expected: %b, Actual: %b\n", fullURL, expectedResult, actualResult);
+				failCount++;	
+			}
+			totalCount++;
+		}
+
+		System.out.printf("Authority Partition Testing Total Running Cases: %d\n", totalCount);
+		System.out.printf("Authority Partition Testing Total Failed Cases: %d\n", failCount);
+		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> Authority Partition Testing End <<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
 	}
-	// You need to create more test cases for your Partitions if you need to
+	
+	// This function is to test Port Partition
+	public void testYourThirdPartition() {
+		UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+		System.out.println(">>>>>>>>>>>>>>>> Port Partition Testing <<<<<<<<<<<<<<<<<<");
+		int failCount = 0;
+		int totalCount = 0;
+		for (int a = 0; a < port.length; a++) {
+			String fullURL = "www.google.com" + port[a];
+			boolean expectedResult = portIsValid[a];
+			boolean actualResult = urlVal.isValid(fullURL);
+			if(expectedResult != actualResult) {
+				System.out.printf("Failed! URL: %s, Expected: %b, Actual: %b\n", fullURL, expectedResult, actualResult);
+				failCount++;	
+			}
+			totalCount++;
+		}
 
+		System.out.printf("Port Partition Testing Total Running Cases: %d\n", totalCount);
+		System.out.printf("Port Partition Testing Total Failed Cases: %d\n", failCount);
+		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> Port Partition Testing End <<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
+	}
+	
+	// This function is to test Path Partition
+	public void testYourFourthPartition() {
+		UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+		System.out.println(">>>>>>>>>>>>>>>> Path Partition Testing <<<<<<<<<<<<<<<<<<");
+		int failCount = 0;
+		int totalCount = 0;
+		for (int a = 0; a < path.length; a++) {
+			String fullURL = "http://www.google.com" + path[a];
+			boolean expectedResult = pathIsValid[a];
+			boolean actualResult = urlVal.isValid(fullURL);
+			if(expectedResult != actualResult) {
+				System.out.printf("Failed! URL: %s, Expected: %b, Actual: %b\n", fullURL, expectedResult, actualResult);
+				failCount++;	
+			}
+			totalCount++;
+		}
+
+		System.out.printf("Path Partition Testing Total Running Cases: %d\n", totalCount);
+		System.out.printf("Path Partition Testing Total Failed Cases: %d\n", failCount);
+		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> Path Partition Testing End <<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
+	}
+	
+	// This function is to test Query Partition
+	public void testYourFifthPartition() {
+		UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+		System.out.println(">>>>>>>>>>>>>>>> Query Partition Testing <<<<<<<<<<<<<<<<<<");
+		int failCount = 0;
+		int totalCount = 0;
+		for (int a = 0; a < query.length; a++) {
+			String fullURL = "http://www.google.com/" + query[a];
+			boolean expectedResult = queryIsValid[a];
+			boolean actualResult = urlVal.isValid(fullURL);
+			if(expectedResult != actualResult) {
+				System.out.printf("Failed! URL: %s, Expected: %b, Actual: %b\n", fullURL, expectedResult, actualResult);
+				failCount++;	
+			}
+			totalCount++;
+		}
+
+		System.out.printf("Query Partition Testing Total Running Cases: %d\n", totalCount);
+		System.out.printf("Query Partition Testing Total Failed Cases: %d\n", failCount);
+		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> Query Partition Testing End <<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
+	}
+	
+	
 	public void testIsValid() {
 		// You can use this function for programming based testing
 
@@ -54,10 +163,10 @@ public class UrlValidatorTest extends TestCase {
 			}
 		}
 		
-		System.out.printf("Total running cases: %d\n", totalCount);
-		System.out.printf("Total failed cases: %d\n", failCount);
+		System.out.printf("Programming Based Testing Total Running Cases: %d\n", totalCount);
+		System.out.printf("Programming Based Testing Total Failed Cases: %d\n", failCount);
 		
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> End <<<<<<<<<<<<<<<<<<<<<<<<<<<");
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> Programming Based Testing End <<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		
 	}
 
@@ -152,13 +261,15 @@ public class UrlValidatorTest extends TestCase {
 	String[] query = {
 			"",
 			"?action=edit&mode=up",
-			"?action=view"		
+			"?action=view",
+			"****____"
 	};
 	
 	boolean[] queryIsValid = {
 			true,
 			true,
-			true			
+			true,
+			false
 	};
 	
 	
