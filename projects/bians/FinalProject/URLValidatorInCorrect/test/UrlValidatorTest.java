@@ -12,7 +12,104 @@ public class UrlValidatorTest extends TestCase {
 	}
 
 	public void testManualTest() {
-//You can use this function to implement your manual testing	   
+//You can use this function to implement your manual testing
+		UrlValidator urlVal = new UrlValidator(UrlValidator.ALLOW_ALL_SCHEMES);
+		System.out.println(">>>>>>>>>>>>>>>> Manul Testing <<<<<<<<<<<<<<<<<<");
+		int failCount = 0;
+		int totalCount = 0;
+		
+		String[] validURL = {
+				"http://foo.com/blah_blah",
+				"http://foo.com/blah_blah/",
+				"http://foo.com/blah_blah_(wikipedia)",
+				"http://foo.com/blah_blah_(wikipedia)_(again)",
+				"http://www.example.com/wpstyle/?p=364",
+				"http://userid:password@example.com:8080",
+				"http://userid:password@example.com:8080/",
+				"http://userid@example.com",
+				"http://userid@example.com/",
+				"http://userid@example.com:8080",
+				"http://userid@example.com:8080/",
+				"http://userid:password@example.com",
+				"http://userid:password@example.com/",
+				"http://142.42.1.1/",
+				"http://142.42.1.1:8080/",
+				"http://foo.com/blah_(wikipedia)#cite-1",
+				"http://foo.com/blah_(wikipedia)_blah#cite-1",
+				"http://foo.com/(something)?after=parens",
+				"http://code.google.com/events/#&product=browser",
+				"http://j.my",
+				"http://1337.net",
+				"http://a.b-c.de",
+				"http://223.255.255.254"
+		};
+		
+		
+		String[] invalidURL = {
+				"http://",
+				"http://.",
+				"http://..",
+				"http://../",
+				"http://?",
+				"http://??",
+				"http://??/",
+				"http://#",
+				"http://##",
+				"http://##/",
+				"http://foo.bar?q=Spaces should be encoded",
+				"//",
+				"//a",
+				"///a",
+				"///",
+				"http:///a",
+				"foo.com",
+				"http:// shouldfail.com",
+				":// should fail",
+				"http://foo.bar/foo(bar)baz quux",
+				"http://-error-.invalid/",
+				"http://a.b--c.de/",
+				"http://-a.b.co",
+				"http://a.b-.co",
+				"http://0.0.0.0",
+				"http://10.1.1.0",
+				"http://10.1.1.255",
+				"http://224.1.1.1",
+				"http://1.1.1.1.1",
+				"http://3628126748",
+				"http://.www.foo.bar/",
+				"http://.www.foo.bar./",
+				"http://10.1.1.1",
+				"http://10.1.1.254"
+		};
+		
+		for (int a = 0; a < validURL.length; a++) {
+			String fullURL = validURL[a];
+			boolean expectedResult = true;
+			boolean actualResult = urlVal.isValid(fullURL);
+			if(expectedResult != actualResult) {
+				System.out.printf("Failed! URL: %s, Expected: %b, Actual: %b\n", fullURL, expectedResult, actualResult);
+				failCount++;	
+			}
+			totalCount++;
+			
+		}
+		
+		for (int a = 0; a < invalidURL.length; a++) {
+			String fullURL = invalidURL[a];
+			boolean expectedResult = true;
+			boolean actualResult = urlVal.isValid(fullURL);
+			if(expectedResult != actualResult) {
+				System.out.printf("Failed! URL: %s, Expected: %b, Actual: %b\n", fullURL, expectedResult, actualResult);
+				failCount++;	
+			}
+			totalCount++;
+			System.out.printf(fullURL + "\n");
+		}
+		
+		
+		System.out.printf("Manul Testing Total Running Cases: %d\n", totalCount);
+		System.out.printf("Manul Testing Total Failed Cases: %d\n", failCount);		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> Manul Testing End <<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
 	}
 
